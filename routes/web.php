@@ -14,9 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
-Route::get('/hola', function () {
-    return view('hola');
+Route::get('/inici', function () {
+    return view('inici');
 });
+
+Route::resource('hola', 'Session');
+
+Route::get('prueba', 'Session@prueba');
+
+
