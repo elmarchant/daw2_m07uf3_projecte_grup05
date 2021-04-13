@@ -13,16 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', 'Session@login');
 
-Route::get('/inici', function () {
-    return view('inici');
-});
+Route::get('/inici', 'Session@inici');
 
-Route::resource('hola', 'Session');
+Route::delete('/session/destroy', 'Session@destroy');
 
-Route::get('prueba', 'Session@prueba');
+Route::post('/session/create', 'Session@create');
 
 
