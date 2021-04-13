@@ -6,11 +6,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="/inici">Inici</a>
-                <a class="nav-link" href="#">Features</a>
-                <a class="nav-link" href="#">Pricing</a>
-                <a class="nav-link" href="#">Prueba</a>
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <a class="nav-link active" href="/inici">Inici</a>
+                <a class="nav-link" href="#">ONGs</a>
+                <a class="nav-link" href="#">Socis</a>
+                <a class="nav-link" href="#">Treballadors</a>
+                @if ($_SESSION['administrador'] == 'true')
+                    <a class="nav-link" href="#">Administració d'usuaris</a>
+                @endif
             </div>
         </div>
         <form action="/session/destroy" method="POST">

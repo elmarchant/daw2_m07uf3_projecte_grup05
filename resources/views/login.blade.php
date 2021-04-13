@@ -20,15 +20,11 @@
                     @csrf
                     <div class="form-group mb-3">
                         <label for="exampleInputEmail1">Nom d'usuari</label>
-                        <input type="text" name="usuari" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input required type="text" name="usuari" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div>
                     <div class="form-group mb-3">
                         <label for="exampleInputPassword1">Contrasenya</label>
-                        <input type="password" name="contrasenya" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <div class="form-group form-check mb-3">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        <input required type="password" name="contrasenya" class="form-control" id="exampleInputPassword1">
                     </div>
                     <button type="submit" class="btn btn-primary">Iniciar sessió</button>
                 </form>

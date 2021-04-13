@@ -5,13 +5,13 @@ create table usuaris(
 	id int not null auto_increment,
     nom varchar(30) not null,
     nom_usuari varchar (20) unique not null,
-    contrasenya varchar(30) not null,
+    contrasenya varchar(32) not null,
     administrador bool default false,
     activo bool default false,
     primary key (id)
 );
 
-insert into usuaris values(0, "Administrador", "admin", "Administrador123", true, true);
+insert into usuaris values(0, "Administrador", "admin", md5("Administrador123"), true, true);
 
 select * from usuaris;
 

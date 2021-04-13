@@ -15,10 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Session@login');
 
-Route::get('/inici', 'Session@inici');
+Route::get('/inici', 'Session@index');
 
 Route::delete('/session/destroy', 'Session@destroy');
 
 Route::post('/session/create', 'Session@create');
+
+Route::get('/self/password', 'Session@self');
+
+Route::put('/self/update/password', 'Session@self');
 
 
