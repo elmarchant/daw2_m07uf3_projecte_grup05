@@ -6,12 +6,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" href="/inici">Inici</a>
+                <a class="nav-link" href="/inici">Inici</a>
                 <a class="nav-link" href="#">ONGs</a>
                 <a class="nav-link" href="#">Socis</a>
                 <a class="nav-link" href="#">Treballadors</a>
                 @if ($_SESSION['administrador'] == 'true')
-                    <a class="nav-link" href="#">Administració d'usuaris</a>
+                    <a class="nav-link" href="/usuaris">Administració d'usuaris</a>
                 @endif
             </div>
         </div>

@@ -21,11 +21,33 @@ class Session extends Controller
         if($session === true){
             switch($path){
                 case 'inici': return view('inici'); break;
+                case 'usuaris': 
+                    $usuaris = $this->select('usuaris');
+                    return view('usuaris', ['usuaris' => $usuaris]); break;
             }
         }else if($session === false){
             return redirect('/');
         }else{
             return $session;
+        }
+    }
+
+    private function select($table, $cols = '*'){
+        $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
+        
+        if(!($mysqli->connect_errno)){
+            $result = $mysqli->query("SELECT ${cols} FROM ${table}");
+            $data = [];
+
+            while($row = $result->fetch_assoc()){
+                array_push($data, $row);
+            }
+            
+            $mysqli->close();
+
+            return $data;
+        }else{
+            return null;
         }
     }
 
@@ -66,36 +88,36 @@ class Session extends Controller
         }
     }
 
-    public function self(){
+    public function self(Request $request){
         if($this->getSession()){
             $path = Route::getCurrentRoute()->uri();
 
             switch($path){
                 case 'self': return view('self'); break;
                 case 'self/password': return view('self-password'); break;
-                case 'self/update/password': 
-                    if(isset($_POST['contrasenya']) && isset($_POST['re-contrasenya'])){
-                        if($_POST['contrasenya'] == $_POST['re-contrasenya']){
-                            $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
-                            if(!($mysqli->connect_errno)){
-                                $query = 'UPDATE usuaris SET contrasenya="'.md5($_POST['contrasenya']).'", activo=true WHERE id='.$_SESSION['id'].'';
-                                $result = $mysqli->query($query);
+                case 'self/update/password':
+                    $this->validate($request, [
+                        'contrasenya' => 'required',
+                        're-contrasenya' => 'required'
+                    ]);
+                    if($request->get('contrasenya') == $request->get('re-contrasenya')){
+                        $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
+                        if(!($mysqli->connect_errno)){
+                            $query = 'UPDATE usuaris SET contrasenya="'.md5($request->get('contrasenya')).'", activo=true WHERE id='.$_SESSION['id'].'';
+                            $result = $mysqli->query($query);
 
-                                if($result){
-                                    $_SESSION['activo'] = 'true';
-                                    return redirect('/inici');
-                                }else{
-                                    return 'Error';
-                                }
-                                
+                            if($result){
+                                $_SESSION['activo'] = 'true';
+                                return redirect('/inici');
                             }else{
-                                return 'Can\'t connect to database.';
+                                return 'Error';
                             }
+                            
                         }else{
-                            return 'Les contrasenyes no coincideixen';
+                            return 'Can\'t connect to database.';
                         }
                     }else{
-                        return 'Bad query';
+                        return 'Les contrasenyes no coincideixen';
                     }
                     break;
             }
@@ -117,12 +139,16 @@ class Session extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        if(isset($_POST['usuari']) && isset($_POST['contrasenya'])){
-            $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
+        $this->validate($request, [
+            'usuari' => 'required',
+            'contrasenya' => 'required'
+        ]);
+
+        $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
             if(!($mysqli->connect_errno)){
-                $query = 'SELECT * FROM usuaris WHERE nom_usuari="'.$_POST['usuari'].'"';
+                $query = 'SELECT * FROM usuaris WHERE nom_usuari="'.$request->get('usuari').'"';
                 $result = $mysqli->query($query);
                 $data = [];
 
@@ -133,7 +159,7 @@ class Session extends Controller
                 $mysqli->close();
 
                 if(sizeof($data) > 0){
-                    if(md5($_POST['contrasenya']) === $data[0]['contrasenya']){
+                    if(md5($request->get('contrasenya')) === $data[0]['contrasenya']){
                         session_start();
                         $_SESSION['id'] = $data[0]['id'];
                         if(intval($data[0]['administrador']) == 1){
@@ -153,14 +179,11 @@ class Session extends Controller
                         return 'Contrasenya incorrecta';
                     }
                 }else{
-                    return 'Does not exist user '.$_POST['usuari'];
+                    return 'Does not exist user '.$request->get('usuari');
                 }
             }else{
                 return 'Can\'t connect: '.$mysqli->connect_errno;
             }
-        }else{
-            return 'Bad query';
-        }
     }
 
     /**
@@ -171,7 +194,6 @@ class Session extends Controller
      */
     public function store(Request $request)
     {
-       
     }
 
     /**
@@ -194,6 +216,10 @@ class Session extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function prueba(Request $request){
+        return $request->pos;
     }
 
     /**
