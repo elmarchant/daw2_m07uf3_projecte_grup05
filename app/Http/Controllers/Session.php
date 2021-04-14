@@ -20,7 +20,10 @@ class Session extends Controller
 
         if($session === true){
             switch($path){
-                case 'inici': return view('inici'); break;
+                case 'inici':
+                    $self = $this->select('usuaris', 'nom, nom_usuari, administrador', 'WHERE id='.$_SESSION['id']);
+                    return view('inici', ['self' => $self[0]]); 
+                    break;
                 case 'usuaris': 
                     $usuaris = $this->select('usuaris');
                     return view('usuaris', ['usuaris' => $usuaris]); break;
@@ -32,11 +35,11 @@ class Session extends Controller
         }
     }
 
-    private function select($table, $cols = '*'){
+    private function select($table, $cols = '*', $filter=''){
         $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
         
         if(!($mysqli->connect_errno)){
-            $result = $mysqli->query("SELECT ${cols} FROM ${table}");
+            $result = $mysqli->query("SELECT ${cols} FROM ${table} ${filter}");
             $data = [];
 
             while($row = $result->fetch_assoc()){

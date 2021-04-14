@@ -17,7 +17,7 @@ select * from usuaris;
 
 create table associacio(
 	CIF varchar(9) not null,
-    nom varchar(30) not null,
+    nom varchar(30) not null unique,
     commarca varchar(20),
     declaracio varchar(30),
     adreca varchar(30),

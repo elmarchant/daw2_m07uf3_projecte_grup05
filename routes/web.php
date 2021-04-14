@@ -25,8 +25,6 @@ Route::post('/session/create', 'Session@create');
 
 Route::get('/self/password', 'Session@self');
 
-Route::get('/prueba', 'Session@prueba');
-
 Route::put('/self/update/password', 'Session@self');
 
 
