@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,15 @@ Route::post('/session/create', 'Session@create');
 Route::get('/self/password', 'Session@self');
 
 Route::put('/self/update/password', 'Session@self');
+
+Route::get('/usuari/create', 'UsuariController@index');
+
+Route::post('/usuari/create/save', 'UsuariController@store');
+
+Route::delete('/usuari/remove', 'UsuariController@destroy');
+
+Route::get('/usuari/update/{id}', 'UsuariController@modify');
+
+Route::put('/usuari/update/{id}/{attribute}', 'UsuariController@update');
 
 

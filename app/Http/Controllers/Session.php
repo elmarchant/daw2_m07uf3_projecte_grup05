@@ -26,7 +26,11 @@ class Session extends Controller
                     break;
                 case 'usuaris': 
                     $usuaris = $this->select('usuaris');
-                    return view('usuaris', ['usuaris' => $usuaris]); break;
+                    return view('usuaris.usuaris', ['usuaris' => $usuaris]); 
+                    break;
+                case 'usuari/create':
+                    return view('usuaris.usuari-create');
+                    break;
             }
         }else if($session === false){
             return redirect('/');
