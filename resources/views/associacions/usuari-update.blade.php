@@ -2,7 +2,7 @@
 <html lang="ca">
 <head>
     @include('structure.head_content')
-    <title>Modificar usuari</title>
+    <title>Modificar associació</title>
     <script src="{{ asset('js/usuari-update.js') }}"></script>
 </head>
 <body>

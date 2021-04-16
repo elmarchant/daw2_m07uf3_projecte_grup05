@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link" href="/inici">Inici</a>
-                <a class="nav-link" href="#">ONGs</a>
+                <a class="nav-link" href="/associacions">Associacions</a>
                 <a class="nav-link" href="#">Socis</a>
                 <a class="nav-link" href="#">Treballadors</a>
                 @if ($_SESSION['administrador'] == 'true')

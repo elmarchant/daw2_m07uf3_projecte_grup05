@@ -21,11 +21,34 @@ class UsuariController extends Controller
                 case 'usuari/create':
                     return view('usuaris.usuari-create');
                     break;
+                case 'usuaris': 
+                    $usuaris = $this->select('usuaris');
+                    return view('usuaris.usuaris', ['usuaris' => $usuaris]); 
+                    break;
             }
         }else if($session === false){
             return redirect('/');
         }else{
             return $session;
+        }
+    }
+
+    private function select($table, $cols = '*', $filter=''){
+        $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
+        
+        if(!($mysqli->connect_errno)){
+            $result = $mysqli->query("SELECT ${cols} FROM ${table} ${filter}");
+            $data = [];
+
+            while($row = $result->fetch_assoc()){
+                array_push($data, $row);
+            }
+            
+            $mysqli->close();
+
+            return $data;
+        }else{
+            return null;
         }
     }
 

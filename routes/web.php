@@ -18,8 +18,6 @@ Route::get('/', 'Session@login');
 
 Route::get('/inici', 'Session@index');
 
-Route::get('/usuaris', 'Session@index');
-
 Route::delete('/session/destroy', 'Session@destroy');
 
 Route::post('/session/create', 'Session@create');
@@ -27,6 +25,8 @@ Route::post('/session/create', 'Session@create');
 Route::get('/self/password', 'Session@self');
 
 Route::put('/self/update/password', 'Session@self');
+
+Route::get('/usuaris', 'UsuariController@index');
 
 Route::get('/usuari/create', 'UsuariController@index');
 
@@ -37,5 +37,13 @@ Route::delete('/usuari/remove', 'UsuariController@destroy');
 Route::get('/usuari/update/{id}', 'UsuariController@modify');
 
 Route::put('/usuari/update/{id}/{attribute}', 'UsuariController@update');
+
+Route::get('/associacions', 'AssociacioController@index');
+
+Route::get('/associacio/create', 'AssociacioController@index');
+
+Route::post('/associacio/create/save', 'AssociacioController@store');
+
+Route::delete('/associacio/remove', 'AssociacioController@destroy');
 
 

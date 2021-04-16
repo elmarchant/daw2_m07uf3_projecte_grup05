@@ -19,19 +19,8 @@ class Session extends Controller
         $path = Route::getCurrentRoute()->uri();
 
         if($session === true){
-            switch($path){
-                case 'inici':
-                    $self = $this->select('usuaris', 'nom, nom_usuari, administrador', 'WHERE id='.$_SESSION['id']);
-                    return view('inici', ['self' => $self[0]]); 
-                    break;
-                case 'usuaris': 
-                    $usuaris = $this->select('usuaris');
-                    return view('usuaris.usuaris', ['usuaris' => $usuaris]); 
-                    break;
-                case 'usuari/create':
-                    return view('usuaris.usuari-create');
-                    break;
-            }
+            $self = $this->select('usuaris', 'nom, nom_usuari, administrador', 'WHERE id='.$_SESSION['id']);
+            return view('inici', ['self' => $self[0]]);
         }else if($session === false){
             return redirect('/');
         }else{
