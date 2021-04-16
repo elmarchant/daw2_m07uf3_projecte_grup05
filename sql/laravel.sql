@@ -17,10 +17,10 @@ select * from usuaris;
 
 create table associacio(
 	CIF varchar(9) not null,
-    nom varchar(30) not null unique,
+    nom varchar(75) not null unique,
     commarca varchar(20),
     declaracio varchar(30),
-    adreca varchar(30),
+    adreca varchar(100),
     poblacio varchar(20),
     tipus varchar(20),
     primary key (CIF)
@@ -33,7 +33,7 @@ create table treballador(
     correu varchar(30),
     mobil varchar(9),
     tel_fixa varchar(9),
-    adreca varchar(30),
+    adreca varchar(100),
     poblacio varchar(20),
     commarca varchar(20),
     data_ingres date default '2021-04-12',
@@ -67,7 +67,7 @@ create table soci(
     correu varchar(30),
     mobil varchar(9),
     tel_fixa varchar(9),
-    adreca varchar(30),
+    adreca varchar(100),
     poblacio varchar(20),
     commarca varchar(20),
     data_associacio date default '2021-04-12',
