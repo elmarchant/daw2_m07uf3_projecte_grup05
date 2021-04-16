@@ -9,7 +9,19 @@
                 <a class="nav-link" href="/inici">Inici</a>
                 <a class="nav-link" href="/associacions">Associacions</a>
                 <a class="nav-link" href="#">Socis</a>
-                <a class="nav-link" href="#">Treballadors</a>
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Treballadors
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Professionals</a></li>
+                                <li><a class="dropdown-item" href="#">Voluntaris</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
                 @if ($_SESSION['administrador'] == 'true')
                     <a class="nav-link" href="/usuaris">Administració d'usuaris</a>
                 @endif

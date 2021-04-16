@@ -40,13 +40,22 @@
                         <td>{{$associacio['declaracio']}}</td>
                         <td>{{$associacio['tipus']}}</td>
                         <td>
-                            <a class="btn btn-success" href="/associacio/update/{{$associacio['CIF']}}" role="button">Modificar</a>
-                            <form style="display: inline;" class="remove-form" action="/associacio/remove" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="cif" value="{{$associacio['CIF']}}">
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                            </form>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Accions
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li><a class="dropdown-item" href="/associacio/update/{{$associacio['CIF']}}" type="button">Modificar</a></li>
+                                    <li>
+                                        <form style="display: inline;" class="remove-form" action="/associacio/remove" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="cif" value="{{$associacio['CIF']}}">
+                                            <button type="submit" class="dropdown-item">Eliminar</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
                         </td>
                     </tr> 
                     @endforeach

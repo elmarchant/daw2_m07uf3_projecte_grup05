@@ -36,14 +36,23 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a class="btn btn-success" href="/usuari/update/{{$usuari['id']}}" role="button">Modificar</a>
-                                    <form style="display: inline;" class="remove-form" action="/usuari/remove" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="id" value="{{$usuari['id']}}">
-                                        <input type="hidden" name="nom_usuari" value="{{$usuari['nom_usuari']}}">
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                    </form>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Accions
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <li><a class="dropdown-item" href="/usuari/update/{{$usuari['id']}}" type="button">Modificar</a></li>
+                                            <li>
+                                                <form style="display: inline;" class="remove-form" action="/usuari/remove" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="hidden" name="id" value="{{$usuari['id']}}">
+                                                    <input type="hidden" name="nom_usuari" value="{{$usuari['nom_usuari']}}">
+                                                    <button type="submit" class="dropdown-item">Eliminar</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr> 
                         @endif

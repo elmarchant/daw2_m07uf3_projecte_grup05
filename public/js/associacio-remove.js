@@ -5,7 +5,7 @@ function main(){
         item.addEventListener('submit', (event)=>{
             event.preventDefault();
             
-            let respuesta = confirm('Voleu eliminar aquesta associació?');
+            let respuesta = confirm('Vols eliminar aquesta associació?');
             
             if(respuesta){
                 item.submit();                

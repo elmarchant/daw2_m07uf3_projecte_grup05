@@ -6,7 +6,7 @@ function main(){
             event.preventDefault();
 
             let data = new FormData(item);
-            let respuesta = confirm('Voleu eliminar l\'usuari '+ data.get('nom_usuari'));
+            let respuesta = confirm('Vols eliminar l\'usuari '+ data.get('nom_usuari'));
             
             if(respuesta){
                 item.submit();                

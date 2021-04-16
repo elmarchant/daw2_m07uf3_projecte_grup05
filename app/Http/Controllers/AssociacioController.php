@@ -161,7 +161,73 @@ class AssociacioController extends Controller
         }else{
             return $session;
         }
+    }
 
+    public function modify($cif)
+    {
+        $session = $this->getSession();
+
+        if($session === true){
+            $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
+            if(!($mysqli->connect_errno)){
+                $query = 'SELECT * FROM associacio WHERE CIF="'.$cif.'"';
+                $result = $mysqli->query($query);
+                $data = [];
+
+                if($result){
+                    while($row = $result->fetch_assoc()){
+                        array_push($data, $row);
+                    }
+                }
+                
+                $mysqli->close();
+    
+                if(sizeof($data) > 0){
+                    return view('associacions.associacio-update', ['data' => $data[0]]);
+                }else{
+                    return view('associacions.associacio-state', ['missatge' => "L'associació no existeix."]);
+                }
+    
+                
+            }else{
+                return view('associacions.associacio-state', ['missatge' => "Error en la conexió: ".$mysqli->connect_errno]);
+            }     
+        }else if($session === false){
+            return redirect('/');
+        }else{
+            return $session;
+        }
+    }
+
+    public function update(Request $request, $cif, $attribute)
+    {
+        $session = $this->getSession();
         
+        $this->validate($request, [$attribute => 'required']);
+        $query = 'UPDATE associacio SET '.$attribute.'="'.$request->get($attribute).'" WHERE CIF="'.$cif.'"';
+    
+        if($session === true){
+            $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
+            if(!($mysqli->connect_errno)){
+
+                $result = $mysqli->query($query);
+                
+                $mysqli->close();
+    
+                if($result){
+                    return view('associacions.associacio-state', ['missatge' => "Modificació satisfactòria"]);
+                }else{
+                    return view('associacions.associacio-state', ['missatge' => "No s'ha pogut modificar"]);
+                }
+    
+                
+            }else{
+                return view('associacions.associacio-state', ['missatge' => "Error en la conexió: ".$mysqli->connect_errno]);
+            }
+        }else if($session === false){
+            return redirect('/');
+        }else{
+            return $session;
+        }
     }
 }

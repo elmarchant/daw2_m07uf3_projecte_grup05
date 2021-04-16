@@ -84,6 +84,10 @@
                     </div>
                 </div>
             </form>
+            <hr>
+            <div class="d-grid gap-2">
+                <a class="btn btn-danger" href="/usuaris" role="button">Cancel·lar</a>
+            </div>
         </section>
     </main>
 </body>

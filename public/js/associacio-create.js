@@ -27,24 +27,24 @@ function main(){
                     }
                     break;
                 case 'poblacio': 
-                    if(item.value.length > 30){
-                        event.preventDefault();
-                        item.classList.add('is-invalid');
-                        alert('Caràcters máxims(Població): 30');
-                    }
-                    break;
-                case 'commarca': 
-                    if(item.value.length > 30){
-                        event.preventDefault();
-                        item.classList.add('is-invalid');
-                        alert('Caràcters máxims(Commarca): 30');
-                    }
-                    break;
-                case 'declaracio': 
                     if(item.value.length > 20){
                         event.preventDefault();
                         item.classList.add('is-invalid');
-                        alert('Caràcters máxims(Declaració): 20');
+                        alert('Caràcters máxims(Població): 20');
+                    }
+                    break;
+                case 'commarca': 
+                    if(item.value.length > 20){
+                        event.preventDefault();
+                        item.classList.add('is-invalid');
+                        alert('Caràcters máxims(Commarca): 20');
+                    }
+                    break;
+                case 'declaracio': 
+                    if(item.value.length > 30){
+                        event.preventDefault();
+                        item.classList.add('is-invalid');
+                        alert('Caràcters máxims(Declaració): 30');
                     }
                     break;
                 case 'tipus': 

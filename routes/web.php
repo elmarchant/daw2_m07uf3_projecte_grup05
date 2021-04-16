@@ -46,4 +46,8 @@ Route::post('/associacio/create/save', 'AssociacioController@store');
 
 Route::delete('/associacio/remove', 'AssociacioController@destroy');
 
+Route::get('/associacio/update/{cif}', 'AssociacioController@modify');
+
+Route::put('/associacio/update/{cif}/{attribute}', 'AssociacioController@update');
+
 
