@@ -70,8 +70,6 @@ create table soci(
     adreca varchar(100),
     poblacio varchar(20),
     commarca varchar(20),
-    data_associacio date default '2021-04-12',
-    quota decimal(8,2) not null,
     primary key(NIF)
 );
 
@@ -79,6 +77,8 @@ create table formen(
 	id int auto_increment,
     CIF varchar(9) not null,
     NIF varchar(9) not null,
+    data_associacio date default '2021-04-12',
+    quota decimal(8,2) not null,
     primary key(id),
     foreign key(CIF) references associacio(CIF),
     foreign key(NIF) references soci(NIF)
