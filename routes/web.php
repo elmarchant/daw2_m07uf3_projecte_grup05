@@ -50,4 +50,18 @@ Route::get('/associacio/update/{cif}', 'AssociacioController@modify');
 
 Route::put('/associacio/update/{cif}/{attribute}', 'AssociacioController@update');
 
+Route::get('/socis', 'SociController@index');
+
+Route::get('/soci/create', 'SociController@index');
+
+Route::post('/soci/create/save', 'SociController@store');
+
+Route::get('/soci/info/{nif}', 'SociController@info');
+
+Route::delete('/soci/remove', 'SociController@destroy');
+
+Route::get('/soci/update/{nif}', 'SociController@modify');
+
+Route::put('/soci/update/{nif}/{attribute}', 'SociController@update');
+
 

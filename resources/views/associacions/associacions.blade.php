@@ -57,6 +57,9 @@
                                 </ul>
                             </div>
                         </td>
+                        @php
+                            $number++;
+                        @endphp
                     </tr> 
                     @endforeach
                 </tbody>

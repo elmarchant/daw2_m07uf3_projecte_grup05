@@ -22,43 +22,43 @@
                 <div class="mb-3 row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">CIF</label>
                     <div class="col-sm-10">
-                        <input type="text" required class="form-control" id="cif" name="cif">
+                        <input type="text" maxlength="9" required class="form-control" id="cif" name="cif">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Nom</label>
                     <div class="col-sm-10">
-                        <input type="text" required class="form-control" id="nom" name="nom">
+                        <input type="text" maxlength="75" required class="form-control" id="nom" name="nom">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Adreça</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="adreca" name="adreca">
+                        <input type="text" maxlength="100" class="form-control" id="adreca" name="adreca">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Població</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="poblacio" name="poblacio">
+                        <input type="text" maxlength="20" class="form-control" id="poblacio" name="poblacio">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Commarca</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="commarca" name="commarca">
+                        <input type="text" maxlength="20" class="form-control" id="commarca" name="commarca">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Declaració</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="declaracio" name="declaracio">
+                        <input type="text" maxlength="30" class="form-control" id="declaracio" name="declaracio">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Tipus</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="tipus" name="tipus">
+                        <input type="text" maxlength="20" class="form-control" id="tipus" name="tipus">
                     </div>
                 </div>
                 <hr>

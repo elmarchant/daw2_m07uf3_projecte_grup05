@@ -8,7 +8,7 @@
             <div class="navbar-nav">
                 <a class="nav-link" href="/inici">Inici</a>
                 <a class="nav-link" href="/associacions">Associacions</a>
-                <a class="nav-link" href="#">Socis</a>
+                <a class="nav-link" href="/socis">Socis</a>
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">

@@ -14,6 +14,7 @@
     <div class="container">
         <div class="row h-100vh justify-content-center align-items-center">
             <div class="col-10 p-4 col-md-8 col-lg-6">
+                <hr>
                 <h1 class="text-center">Coordinadora Catalana d'ONGs</h1>
                 <hr>
                 <form action="/session/create" method="POST">
@@ -28,6 +29,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Iniciar sessió</button>
                 </form>
+                <hr>
             </div>
         </div>
     </div>
