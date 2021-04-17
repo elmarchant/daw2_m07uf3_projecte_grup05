@@ -17,10 +17,6 @@
                         <th>#</th>
                         <th>CIF</th>
                         <th>Nom</th>
-                        <th>Adreça</th>
-                        <th>Població</th>
-                        <th>Commarca</th>
-                        <th>Declaració</th>
                         <th>Tipus</th>
                         <th>Accions</th>
                     </tr>
@@ -34,10 +30,6 @@
                         <th>{{$number}}</th>
                         <td>{{$associacio['CIF']}}</td>
                         <td>{{$associacio['nom']}}</td>
-                        <td>{{$associacio['adreca']}}</td>
-                        <td>{{$associacio['poblacio']}}</td>
-                        <td>{{$associacio['commarca']}}</td>
-                        <td>{{$associacio['declaracio']}}</td>
                         <td>{{$associacio['tipus']}}</td>
                         <td>
                             <div class="dropdown">
@@ -45,16 +37,15 @@
                                     Accions
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li><a class="dropdown-item" href="/associacio/info/{{$associacio['CIF']}}" type="button">Informació completa</a></li>
                                     <li><a class="dropdown-item" href="/associacio/update/{{$associacio['CIF']}}" type="button">Modificar</a></li>
-                                    <li>
-                                        <form style="display: inline;" class="remove-form" action="/associacio/remove" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="cif" value="{{$associacio['CIF']}}">
-                                            <button type="submit" class="dropdown-item">Eliminar</button>
-                                        </form>
-                                    </li>
+                                    <li><button type="submit" form="{{$associacio['CIF']}}" class="dropdown-item">Eliminar</button></li>
                                 </ul>
+                                <form style="display: none;" id="{{$associacio['CIF']}}" class="remove-form" action="/associacio/remove" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="cif" value="{{$associacio['CIF']}}">
+                                </form>
                             </div>
                         </td>
                         @php

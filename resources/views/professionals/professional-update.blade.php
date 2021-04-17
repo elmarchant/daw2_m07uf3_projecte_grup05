@@ -50,7 +50,7 @@
                     <label for="staticEmail" class="col-sm-2 col-form-label">Correu</label>
                     <div class="col-sm-10">
                         <div class="input-group">
-                            <input type="email" class="form-control" maxlength="100" required name="correu" value="{{$data['correu']}}" placeholder="{{$data['correu']}}">
+                            <input type="email" class="form-control" maxlength="30" required name="correu" value="{{$data['correu']}}" placeholder="{{$data['correu']}}">
                             <button class="btn btn-success" type="submit">Modificar</button>
                         </div>
                     </div>

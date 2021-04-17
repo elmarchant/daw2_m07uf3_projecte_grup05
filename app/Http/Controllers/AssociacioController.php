@@ -14,18 +14,23 @@ class AssociacioController extends Controller
     public function index()
     {
         $session = $this->getSession();
-        $path = Route::getCurrentRoute()->uri();
 
         if($session === true){
-            switch($path){
-                case 'associacio/create':
-                    return view('associacions.associacio-create');
-                    break;
-                case 'associacions': 
-                    $associacions = $this->select('associacio');
-                    return view('associacions.associacions', ['associacions' => $associacions]); 
-                    break;
-            }
+            $associacions = $this->select('associacio');
+            return view('associacions.associacions', ['associacions' => $associacions]); 
+        }else if($session === false){
+            return redirect('/');
+        }else{
+            return $session;
+        }
+    }
+
+    public function create()
+    {
+        $session = $this->getSession();
+
+        if($session === true){
+            return view('associacions.associacio-create');
         }else if($session === false){
             return redirect('/');
         }else{
@@ -86,6 +91,19 @@ class AssociacioController extends Controller
                 }
         }else{
             return false;
+        }
+    }
+
+    public function info($cif){
+        $session = $this->getSession();
+
+        if($session === true){
+            $associacio = $this->select('associacio', '*', 'WHERE cif="'.$cif.'"');
+            return view('associacions.associacio-info', ['associacio' => $associacio[0]]);
+        }else if($session === false){
+            return redirect('/');
+        }else{
+            return $session;
         }
     }
 

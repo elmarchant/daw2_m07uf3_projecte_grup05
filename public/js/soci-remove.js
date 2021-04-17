@@ -1,5 +1,5 @@
 function main(){
-    var forms = document.querySelectorAll('form');
+    var forms = document.querySelectorAll('form.remove-form');
 
     forms.forEach(item =>{
         item.addEventListener('submit', (event)=>{

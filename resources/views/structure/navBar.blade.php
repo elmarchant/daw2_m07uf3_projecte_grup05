@@ -16,7 +16,7 @@
                                 Treballadors
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Professionals</a></li>
+                                <li><a class="dropdown-item" href="/professionals">Professionals</a></li>
                                 <li><a class="dropdown-item" href="#">Voluntaris</a></li>
                             </ul>
                         </li>

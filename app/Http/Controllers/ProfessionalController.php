@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Soci;
+use App\Models\Professional;
+use App\Models\Treballador;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use mysqli;
 
-class SociController extends Controller
+class ProfessionalController extends Controller
 {
+    //
     public function index()
     {
         $session = $this->getSession();
 
         if($session === true){
-            $socis = $this->select('soci');
-            return view('socis.socis', ['socis' => $socis]); 
+            $professionals = $this->select('professional', 'treballador.nif, nom, cognom', 'INNER JOIN treballador WHERE professional.nif = treballador.nif');
+            return view('professionals.professionals', ['professionals' => $professionals]); 
         }else if($session === false){
             return redirect('/');
         }else{
@@ -29,7 +31,12 @@ class SociController extends Controller
         $session = $this->getSession();
 
         if($session === true){
-            return view('socis.soci-create');
+            $associacions = $this->select('associacio', 'cif, nom');
+            if($associacions === null){
+                return view('professionals.professional-state', ['missatge' => "Error: No es pot afegir ningú professional porque no existeix ninguna Associació."]);
+            }else{
+                return view('professionals.professional-create', ['associacions' => $associacions]);
+            }
         }else if($session === false){
             return redirect('/');
         }else{
@@ -39,10 +46,15 @@ class SociController extends Controller
     
     public function info($nif){
         $session = $this->getSession();
+        $path = Route::getCurrentRoute()->uri();
 
         if($session === true){
-            $soci = $this->select('soci', '*', 'WHERE NIF="'.$nif.'"');
-            return view('socis.soci-info', ['soci' => $soci[0]]);
+            $professional = $this->select('professional', '*', 'INNER JOIN treballador WHERE professional.nif = treballador.nif AND professional.nif="'.$nif.'"');
+            $associacio = $this->select('treballador', 'associacio.nom as nom', 'INNER JOIN associacio WHERE treballador.cif = associacio.cif AND nif="'.$nif.'"');
+            return view('professionals.professional-info', [
+                'professional' => $professional[0],
+                'associacio' =>  $associacio[0]
+            ]);
         }else if($session === false){
             return redirect('/');
         }else{
@@ -57,8 +69,12 @@ class SociController extends Controller
             $result = $mysqli->query("SELECT ${cols} FROM ${table} ${filter}");
             $data = [];
 
-            while($row = $result->fetch_assoc()){
-                array_push($data, $row);
+            if($result){
+                while($row = $result->fetch_assoc()){
+                    array_push($data, $row);
+                }
+            }else{
+                return null;
             }
             
             $mysqli->close();
@@ -113,10 +129,12 @@ class SociController extends Controller
             $this->validate($request, [
                 'nif' => 'required',
                 'nom' => 'required',
-                'cognom' => 'required'
+                'cognom' => 'required',
+                'cif' => 'required',
+                'data_ingres' => 'required'
             ]);
     
-            $soci = new Soci([
+            $treballador = new Treballador([
                 'nif' => $request->get('nif'),
                 'nom' => $request->get('nom'),
                 'cognom' => $request->get('cognom'),
@@ -125,20 +143,35 @@ class SociController extends Controller
                 'tel_fixa' => $request->get('tel_fixa'),
                 'adreca' => $request->get('adreca'),
                 'poblacio' => $request->get('poblacio'),
-                'commarca' => $request->get('commarca')
+                'commarca' => $request->get('commarca'),
+                'data_ingres' => $request->get('data_ingres'),
+                'cif' => $request->get('cif')
             ]);
     
-            $status = $soci->save();
+            $status = $treballador->save();
 
             $message = '';
 
             if($status){
-                $message = "El nou soci ".$request->get('nom')." ".$request->get('cognom')." s'ha afegit correctament.";
+                $professional = new Professional([
+                    'nif' => $request->get('nif'),
+                    'carrec' => $request->get('carrec'),
+                    'desc_irpf' => floatval($request->get('desc_irpf')),
+                    'quantitat_seguretat_social' => floatval($request->get('quantitat_seguretat_social'))
+                ]);
+
+                $status = $professional->save();
+
+                if($status){
+                    $message = "El nou professional ".$request->get('nom')." ".$request->get('cognom')." s'ha afegit correctament.";
+                }else{
+                    $message = "No s'ha pogut afegir el professional ".$request->get('nom')." ".$request->get('cognom').".";
+                }
             }else{
-                $message = "No s'ha pogut afegir el soci ".$request->get('nom')." ".$request->get('cognom').".";
+                $message = "No s'ha pogut afegir el professional ".$request->get('nom')." ".$request->get('cognom').".";
             }
     
-            return view('socis.soci-state', ['missatge' => $message]);
+            return view('professionals.professional-state', ['missatge' => $message]);
         }else if($session === false){
             return redirect('/');
         }else{
@@ -156,20 +189,27 @@ class SociController extends Controller
 
             $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
             if(!($mysqli->connect_errno)){
-                $query = 'DELETE from soci WHERE NIF="'.$request->get('nif').'"';
+                $query = 'DELETE from professional WHERE NIF="'.$request->get('nif').'"';
+                $query2 = 'DELETE from treballador WHERE NIF="'.$request->get('nif').'"';
                 $result = $mysqli->query($query);
-                
-                $mysqli->close();
     
                 if($result){
-                    return view('socis.soci-state', ['missatge' => "S'ha eliminat el soci"]);
+                    $result2 = $mysqli->query($query2);
+                    $mysqli->close();
+
+                    if($result2){
+                        return view('professionals.professional-state', ['missatge' => "S'ha eliminat el professional"]);
+                    }else{
+                        return view('professionals.professional-state', ['missatge' => "No s'ha pogut eliminar el treballador"]);
+                    }
                 }else{
-                    return view('socis.soci-state', ['missatge' => "No s'ha pogut eliminar el soci"]);
+                    $mysqli->close();
+                    return view('professionals.professional-state', ['missatge' => "No s'ha pogut eliminar el professional"]);
                 }
     
                 
             }else{
-                return view('socis.soci-state', ['missatge' => "Error en la conexió: ".$mysqli->connect_errno]);
+                return view('professionals.professional-state', ['missatge' => "Error en la conexió: ".$mysqli->connect_errno]);
             }
         }else if($session === false){
             return redirect('/');
@@ -184,12 +224,12 @@ class SociController extends Controller
 
         if($session === true){
 
-            $data = $this->select('soci', '*', 'WHERE NIF="'.$nif.'"');
+            $data = $this->select('professional', '*', 'WHERE NIF="'.$nif.'"');
 
             if(sizeof($data) > 0){
-                return view('socis.soci-update', ['data' => $data[0]]);
+                return view('professionals.professional-update', ['data' => $data[0]]);
             }else{
-                return view('socis.soci-state', ['missatge' => "L'associació no existeix."]);
+                return view('professionals.professional-state', ['missatge' => "L'asprofessionalació no existeix."]);
             }    
         }else if($session === false){
             return redirect('/');
@@ -203,7 +243,7 @@ class SociController extends Controller
         $session = $this->getSession();
         
         $this->validate($request, [$attribute => 'required']);
-        $query = 'UPDATE soci SET '.$attribute.'="'.$request->get($attribute).'" WHERE NIF="'.$nif.'"';
+        $query = 'UPDATE professional SET '.$attribute.'="'.$request->get($attribute).'" WHERE NIF="'.$nif.'"';
     
         if($session === true){
             $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
@@ -214,14 +254,14 @@ class SociController extends Controller
                 $mysqli->close();
     
                 if($result){
-                    return view('socis.soci-state', ['missatge' => "Modificació satisfactòria"]);
+                    return view('professionals.professional-state', ['missatge' => "Modificació satisfactòria"]);
                 }else{
-                    return view('socis.soci-state', ['missatge' => "No s'ha pogut modificar"]);
+                    return view('professionals.professional-state', ['missatge' => "No s'ha pogut modificar"]);
                 }
     
                 
             }else{
-                return view('socis.soci-state', ['missatge' => "Error en la conexió: ".$mysqli->connect_errno]);
+                return view('professionals.professional-state', ['missatge' => "Error en la conexió: ".$mysqli->connect_errno]);
             }
         }else if($session === false){
             return redirect('/');

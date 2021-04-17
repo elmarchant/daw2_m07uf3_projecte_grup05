@@ -1,14 +1,12 @@
 function main(){
-    let forms = document.querySelectorAll('form.remove-form');
+    var forms = document.querySelectorAll('form.remove-form');
 
     forms.forEach(item =>{
         item.addEventListener('submit', (event)=>{
-            event.preventDefault();
-            
-            let respuesta = confirm('Vols eliminar aquesta associació?');
-            
-            if(respuesta){
-                item.submit();                
+            var res = confirm('Vols eliminar aquesta associació?');
+
+            if(!res){
+                event.preventDefault();
             }
         });
     });

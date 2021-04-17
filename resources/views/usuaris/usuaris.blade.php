@@ -14,6 +14,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>ID</th>
                         <th>Nom</th>
                         <th>Nom usuari</th>
@@ -22,9 +23,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $number = 1;
+                    @endphp
                     @foreach ($usuaris as $usuari)
                         @if ($usuari['id'] != $_SESSION['id'])
                             <tr>
+                                <th>{{$number}}</th>
                                 <td>{{$usuari['id']}}</td>
                                 <td>{{$usuari['nom']}}</td>
                                 <td>{{$usuari['nom_usuari']}}</td>
@@ -42,19 +47,20 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                             <li><a class="dropdown-item" href="/usuari/update/{{$usuari['id']}}" type="button">Modificar</a></li>
-                                            <li>
-                                                <form style="display: inline;" class="remove-form" action="/usuari/remove" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <input type="hidden" name="id" value="{{$usuari['id']}}">
-                                                    <input type="hidden" name="nom_usuari" value="{{$usuari['nom_usuari']}}">
-                                                    <button type="submit" class="dropdown-item">Eliminar</button>
-                                                </form>
-                                            </li>
+                                            <li><button type="submit" form="{{$usuari['id']}}" class="dropdown-item">Eliminar</button></li>
                                         </ul>
+                                        <form style="display: none;" id="{{$usuari['id']}}" class="remove-form" action="/usuari/remove" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="id" value="{{$usuari['id']}}">
+                                            <input type="hidden" name="nom_usuari" value="{{$usuari['nom_usuari']}}">
+                                        </form>
                                     </div>
                                 </td>
-                            </tr> 
+                            </tr>
+                            @php
+                                $number++;
+                            @endphp
                         @endif
                     @endforeach
                 </tbody>

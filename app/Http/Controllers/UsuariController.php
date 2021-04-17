@@ -14,18 +14,23 @@ class UsuariController extends Controller
     public function index()
     {
         $session = $this->getSession();
-        $path = Route::getCurrentRoute()->uri();
 
         if($session === true){
-            switch($path){
-                case 'usuari/create':
-                    return view('usuaris.usuari-create');
-                    break;
-                case 'usuaris': 
-                    $usuaris = $this->select('usuaris');
-                    return view('usuaris.usuaris', ['usuaris' => $usuaris]); 
-                    break;
-            }
+            $usuaris = $this->select('usuaris');
+            return view('usuaris.usuaris', ['usuaris' => $usuaris]); 
+        }else if($session === false){
+            return redirect('/');
+        }else{
+            return $session;
+        }
+    }
+
+    public function create()
+    {
+        $session = $this->getSession();
+
+        if($session === true){
+            return view('usuaris.usuari-create');
         }else if($session === false){
             return redirect('/');
         }else{

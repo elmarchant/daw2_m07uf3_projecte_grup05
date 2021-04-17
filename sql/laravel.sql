@@ -30,7 +30,7 @@ create table treballador(
 	NIF varchar(9) not null,
     nom varchar(30) not null,
     cognom varchar (30) not null,
-    correu varchar(30),
+    correu varchar(100),
     mobil varchar(9),
     tel_fixa varchar(9),
     adreca varchar(100),
@@ -44,7 +44,7 @@ create table treballador(
 
 create table professional(
 	NIF varchar(9) not null,
-    carrec varchar(10) not null,
+    carrec varchar(30) not null,
     desc_irpf decimal(6,2),
     quantitat_seguretat_social decimal(8,2),
     primary key(NIF),
@@ -53,7 +53,7 @@ create table professional(
 
 create table voluntari(
 	NIF varchar(9) not null,
-    professio varchar(20),
+    professio varchar(30),
 	hores int default 0,
     edat date not null,
     primary key(NIF),
@@ -64,7 +64,7 @@ create table soci(
 	NIF varchar(9) not null,
     nom varchar(30) not null,
     cognom varchar (30) not null,
-    correu varchar(30),
+    correu varchar(100),
     mobil varchar(9),
     tel_fixa varchar(9),
     adreca varchar(100),

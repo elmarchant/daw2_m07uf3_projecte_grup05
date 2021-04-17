@@ -28,7 +28,7 @@ Route::put('/self/update/password', 'Session@self');
 
 Route::get('/usuaris', 'UsuariController@index');
 
-Route::get('/usuari/create', 'UsuariController@index');
+Route::get('/usuari/create', 'UsuariController@create');
 
 Route::post('/usuari/create/save', 'UsuariController@store');
 
@@ -40,7 +40,9 @@ Route::put('/usuari/update/{id}/{attribute}', 'UsuariController@update');
 
 Route::get('/associacions', 'AssociacioController@index');
 
-Route::get('/associacio/create', 'AssociacioController@index');
+Route::get('/associacio/info/{cif}', 'AssociacioController@info');
+
+Route::get('/associacio/create', 'AssociacioController@create');
 
 Route::post('/associacio/create/save', 'AssociacioController@store');
 
@@ -52,7 +54,7 @@ Route::put('/associacio/update/{cif}/{attribute}', 'AssociacioController@update'
 
 Route::get('/socis', 'SociController@index');
 
-Route::get('/soci/create', 'SociController@index');
+Route::get('/soci/create', 'SociController@create');
 
 Route::post('/soci/create/save', 'SociController@store');
 
@@ -64,4 +66,16 @@ Route::get('/soci/update/{nif}', 'SociController@modify');
 
 Route::put('/soci/update/{nif}/{attribute}', 'SociController@update');
 
+Route::get('/professionals', 'ProfessionalController@index');
 
+Route::get('/professional/create', 'ProfessionalController@create');
+
+Route::post('/professional/create/save', 'ProfessionalController@store');
+
+Route::get('/professional/info/{nif}', 'ProfessionalController@info');
+
+Route::delete('/professional/remove', 'ProfessionalController@destroy');
+
+Route::get('/professional/update/{nif}', 'ProfessionalController@modify');
+
+Route::put('/professional/update/{nif}/{attribute}', 'ProfessionalController@update');
