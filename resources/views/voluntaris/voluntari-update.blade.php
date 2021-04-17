@@ -2,20 +2,20 @@
 <html lang="ca">
 <head>
     @include('structure.head_content')
-    <title>Modificar professional</title>
+    <title>Modificar voluntari</title>
 </head>
 <body>
     <main>
         <section class="container rounded p-4 mt-4 mb-4 bg-light">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/professionals">Professionals</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Modificar professional</li>
+                    <li class="breadcrumb-item"><a href="/voluntaris">voluntaris</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Modificar voluntari</li>
                 </ol>
             </nav>
-            <h1>Modificar professional: {{$data['nom']}}</h1>
+            <h1>Modificar voluntari: {{$data['nom']}}</h1>
             <hr>
-            <form id="nom" action="/professional/update/{{$data['NIF']}}/treballador/nom" method="post">
+            <form id="nom" action="/voluntari/update/{{$data['NIF']}}/treballador/nom" method="post">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
@@ -29,7 +29,7 @@
                 </div>
             </form>
             <hr>
-            <form id="cognom" action="/professional/update/{{$data['NIF']}}/treballador/cognom" method="post">
+            <form id="cognom" action="/voluntari/update/{{$data['NIF']}}/treballador/cognom" method="post">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
@@ -43,7 +43,7 @@
                 </div>
             </form>
             <hr>
-            <form id="correu" action="/professional/update/{{$data['NIF']}}/treballador/correu" method="post">
+            <form id="correu" action="/voluntari/update/{{$data['NIF']}}/treballador/correu" method="post">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
@@ -57,7 +57,7 @@
                 </div>
             </form>
             <hr>
-            <form id="mobil" action="/professional/update/{{$data['NIF']}}/treballador/mobil" method="post">
+            <form id="mobil" action="/voluntari/update/{{$data['NIF']}}/treballador/mobil" method="post">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
@@ -71,7 +71,7 @@
                 </div>
             </form>
             <hr>
-            <form id="tel_fixa" action="/professional/update/{{$data['NIF']}}/treballador/tel_fixa" method="post">
+            <form id="tel_fixa" action="/voluntari/update/{{$data['NIF']}}/treballador/tel_fixa" method="post">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
@@ -85,7 +85,7 @@
                 </div>
             </form>
             <hr>
-            <form id="adreca" action="/professional/update/{{$data['NIF']}}/treballador/adreca" method="post">
+            <form id="adreca" action="/voluntari/update/{{$data['NIF']}}/treballador/adreca" method="post">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
@@ -99,7 +99,7 @@
                 </div>
             </form>
             <hr>
-            <form id="poblacio" action="/professional/update/{{$data['NIF']}}/treballador/poblacio" method="post">
+            <form id="poblacio" action="/voluntari/update/{{$data['NIF']}}/treballador/poblacio" method="post">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
@@ -113,7 +113,7 @@
                 </div>
             </form>
             <hr>
-            <form id="commarca" action="/professional/update/{{$data['NIF']}}/treballador/commarca" method="post">
+            <form id="commarca" action="/voluntari/update/{{$data['NIF']}}/treballador/commarca" method="post">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
@@ -127,7 +127,7 @@
                 </div>
             </form>
             <hr>
-            <form id="commarca" action="/professional/update/{{$data['NIF']}}/treballador/cif" method="post">
+            <form id="commarca" action="/voluntari/update/{{$data['NIF']}}/treballador/cif" method="post">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
@@ -152,7 +152,7 @@
                 </div>
             </form>
             <hr>
-            <form id="data_ingres" action="/professional/update/{{$data['NIF']}}/treballador/data_ingres" method="post">
+            <form id="data_ingres" action="/voluntari/update/{{$data['NIF']}}/treballador/data_ingres" method="post">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
@@ -166,42 +166,42 @@
                 </div>
             </form>
             <hr>
-            <form id="carrec" action="/professional/update/{{$data['NIF']}}/professional/carrec" method="post">
+            <form id="professio" action="/voluntari/update/{{$data['NIF']}}/voluntari/professio" method="post">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Càrrec</label>
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Professió</label>
                     <div class="col-sm-10">
                         <div class="input-group">
-                            <input type="text" class="form-control" maxlength="30" required name="carrec" value="{{$data['carrec']}}" placeholder="{{$data['carrec']}}">
+                            <input type="text" class="form-control" maxlength="30" required name="professio" value="{{$data['professio']}}" placeholder="{{$data['professio']}}">
                             <button class="btn btn-success" type="submit">Modificar</button>
                         </div>
                     </div>
                 </div>
             </form>
             <hr>
-            <form id="desc_irpf" action="/professional/update/{{$data['NIF']}}/professional/desc_irpf" method="post">
+            <form id="hores" action="/voluntari/update/{{$data['NIF']}}/voluntari/hores" method="post">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Descompte de l'IRPF (%)</label>
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Hores</label>
                     <div class="col-sm-10">
                         <div class="input-group">
-                            <input type="number" class="form-control" min="0" max="100" required name="desc_irpf" value="{{$data['desc_irpf']}}" placeholder="{{$data['desc_irpf']}}">
+                            <input type="number" class="form-control" min="0" required name="hores" value="{{$data['hores']}}" placeholder="{{$data['hores']}}">
                             <button class="btn btn-success" type="submit">Modificar</button>
                         </div>
                     </div>
                 </div>
             </form>
             <hr>
-            <form id="quantitat_seguretat_social" action="/professional/update/{{$data['NIF']}}/professional/quantitat_seguretat_social" method="post">
+            <form id="edat" action="/voluntari/update/{{$data['NIF']}}/voluntari/edat" method="post">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Commarca</label>
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Edat</label>
                     <div class="col-sm-10">
                         <div class="input-group">
-                            <input type="number" class="form-control" step="0.01" min="0" required name="quantitat_seguretat_social" value="{{$data['quantitat_seguretat_social']}}" placeholder="{{$data['quantitat_seguretat_social']}}">
+                            <input type="date" class="form-control" min="0" required name="edat" value="{{$data['edat']}}" placeholder="{{$data['edat']}}">
                             <button class="btn btn-success" type="submit">Modificar</button>
                         </div>
                     </div>
@@ -209,7 +209,7 @@
             </form>
             <hr>
             <div class="d-grid gap-2">
-                <a class="btn btn-danger" href="/professionals" role="button">Cancel·lar</a>
+                <a class="btn btn-danger" href="/voluntaris" role="button">Cancel·lar</a>
             </div>
         </section>
     </main>

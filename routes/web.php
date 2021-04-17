@@ -79,3 +79,17 @@ Route::delete('/professional/remove', 'ProfessionalController@destroy');
 Route::get('/professional/update/{nif}', 'ProfessionalController@modify');
 
 Route::put('/professional/update/{nif}/{tabla}/{attribute}', 'ProfessionalController@update');
+
+Route::get('/voluntaris', 'VoluntariController@index');
+
+Route::get('/voluntari/create', 'VoluntariController@create');
+
+Route::post('/voluntari/create/save', 'VoluntariController@store');
+
+Route::get('/voluntari/info/{nif}', 'VoluntariController@info');
+
+Route::delete('/voluntari/remove', 'VoluntariController@destroy');
+
+Route::get('/voluntari/update/{nif}', 'VoluntariController@modify');
+
+Route::put('/voluntari/update/{nif}/{tabla}/{attribute}', 'VoluntariController@update');

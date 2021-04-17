@@ -17,7 +17,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="/professionals">Professionals</a></li>
-                                <li><a class="dropdown-item" href="#">Voluntaris</a></li>
+                                <li><a class="dropdown-item" href="/voluntaris">Voluntaris</a></li>
                             </ul>
                         </li>
                     </ul>
