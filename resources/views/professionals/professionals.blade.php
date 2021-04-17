@@ -3,7 +3,7 @@
 <head>
     @include('structure.head_content')
     <title>Professionals</title>
-    <script src="{{ asset('js/professional-remove.js') }}"></script>
+    <script src="{{ asset('js/treballador-remove.js') }}"></script>
 </head>
 <body>
     <main>

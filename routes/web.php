@@ -78,4 +78,4 @@ Route::delete('/professional/remove', 'ProfessionalController@destroy');
 
 Route::get('/professional/update/{nif}', 'ProfessionalController@modify');
 
-Route::put('/professional/update/{nif}/{attribute}', 'ProfessionalController@update');
+Route::put('/professional/update/{nif}/{tabla}/{attribute}', 'ProfessionalController@update');

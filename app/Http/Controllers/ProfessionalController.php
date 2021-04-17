@@ -224,13 +224,21 @@ class ProfessionalController extends Controller
 
         if($session === true){
 
-            $data = $this->select('professional', '*', 'WHERE NIF="'.$nif.'"');
+            $data = $this->select('professional', '*', 'INNER JOIN treballador WHERE professional.nif = treballador.nif AND professional.nif="'.$nif.'"');
+            $associacions = $this->select('associacio', 'cif, nom');
 
-            if(sizeof($data) > 0){
-                return view('professionals.professional-update', ['data' => $data[0]]);
+            if($data !== null){
+                if(sizeof($data) > 0){
+                    return view('professionals.professional-update', [
+                            'data' => $data[0],
+                            'associacions' => $associacions
+                        ]);
+                }else{
+                    return view('professionals.professional-state', ['missatge' => "El treballador no existeix."]);
+                } 
             }else{
-                return view('professionals.professional-state', ['missatge' => "L'asprofessionalació no existeix."]);
-            }    
+                return view('professionals.professional-state', ['missatge' => "No s'ha pogut obtendre les dades del treballador."]);
+            }
         }else if($session === false){
             return redirect('/');
         }else{
@@ -238,12 +246,12 @@ class ProfessionalController extends Controller
         }
     }
 
-    public function update(Request $request, $nif, $attribute)
+    public function update(Request $request, $nif, $tabla, $attribute)
     {
         $session = $this->getSession();
         
         $this->validate($request, [$attribute => 'required']);
-        $query = 'UPDATE professional SET '.$attribute.'="'.$request->get($attribute).'" WHERE NIF="'.$nif.'"';
+        $query = 'UPDATE '.$tabla.' SET '.$attribute.'="'.$request->get($attribute).'" WHERE NIF="'.$nif.'"';
     
         if($session === true){
             $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
