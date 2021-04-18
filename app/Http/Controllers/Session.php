@@ -246,8 +246,14 @@ class Session extends Controller
     {
         $session = $this->getSession();
         
+        $value = $request->get($attribute);
+
+        if($attribute == 'contrasenya'){
+            $value = md5($request->get($attribute));
+        }
+
         $this->validate($request, [$attribute => 'required']);
-        $query = 'UPDATE usuaris SET '.$attribute.'="'.md5($request->get($attribute)).'" WHERE id="'.$id.'"';
+        $query = 'UPDATE usuaris SET '.$attribute.'="'.$value.'" WHERE id="'.$id.'"';
     
         if($session === true){
             $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
