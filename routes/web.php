@@ -26,6 +26,10 @@ Route::get('/self/password', 'Session@self');
 
 Route::put('/self/update/password', 'Session@self');
 
+Route::get('/self/update/{id}', 'Session@modify');
+
+Route::put('/self/update/{id}/{attribute}', 'Session@update');
+
 Route::get('/usuaris', 'UsuariController@index');
 
 Route::get('/usuari/create', 'UsuariController@create');

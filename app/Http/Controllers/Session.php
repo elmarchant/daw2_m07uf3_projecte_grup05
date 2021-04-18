@@ -16,10 +16,9 @@ class Session extends Controller
     public function index()
     {
         $session = $this->getSession();
-        $path = Route::getCurrentRoute()->uri();
 
         if($session === true){
-            $self = $this->select('usuaris', 'nom, nom_usuari, administrador', 'WHERE id='.$_SESSION['id']);
+            $self = $this->select('usuaris', '*', 'WHERE id='.$_SESSION['id']);
             return view('inici', ['self' => $self[0]]);
         }else if($session === false){
             return redirect('/');
@@ -209,13 +208,31 @@ class Session extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
 
-    public function prueba(Request $request){
-        return $request->pos;
+    public function modify($id)
+    {
+        $session = $this->getSession();
+
+        if($session === true){
+
+            $data = $this->select('usuaris', 'id, nom, nom_usuari', 'WHERE id="'.$id.'"');
+
+            if($data !== null){
+                if(sizeof($data) > 0){
+                    return view('update', [
+                            'data' => $data[0]
+                        ]);
+                }else{
+                    return view('state', ['missatge' => "El usuari no existeix."]);
+                } 
+            }else{
+                return view('state', ['missatge' => "No s'ha pogut obtendre les dades del usuari."]);
+            }
+        }else if($session === false){
+            return redirect('/');
+        }else{
+            return $session;
+        }
     }
 
     /**
@@ -225,9 +242,36 @@ class Session extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $attribute)
     {
-        //
+        $session = $this->getSession();
+        
+        $this->validate($request, [$attribute => 'required']);
+        $query = 'UPDATE usuaris SET '.$attribute.'="'.md5($request->get($attribute)).'" WHERE id="'.$id.'"';
+    
+        if($session === true){
+            $mysqli = new mysqli('localhost', 'ccong', 'CCONGManagement123', 'ccong');
+            if(!($mysqli->connect_errno)){
+
+                $result = $mysqli->query($query);
+                
+                $mysqli->close();
+    
+                if($result){
+                    return view('state', ['missatge' => "Modificació satisfactòria"]);
+                }else{
+                    return view('state', ['missatge' => "No s'ha pogut modificar"]);
+                }
+    
+                
+            }else{
+                return view('state', ['missatge' => "Error en la conexió: ".$mysqli->connect_errno]);
+            }
+        }else if($session === false){
+            return redirect('/');
+        }else{
+            return $session;
+        }
     }
 
     /**

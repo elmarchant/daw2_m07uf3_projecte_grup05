@@ -13,16 +13,42 @@
             <p>Nosaltres coordinem totes les ONG de Catalunya.</p>
             <h1>Dades de l'usuari</h1>
             <hr>
-            <p><b>Nom: </b>{{$self['nom']}}</p>
-            <p><b>Nom usuari: </b>{{$self['nom_usuari']}}</p>
-            <p><b>Contrasenya: </b>*******</p>
-            <p><b>Rol: </b>
-                @if (intval($self['administrador']) == 1)
-                    Administrador
-                @else
-                    Usuari
-                @endif
-            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Tipus de dada</th>
+                        <th>Dades</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{$self['nom']}}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom usuari</th>
+                        <td>{{$self['nom_usuari']}}</td>
+                    </tr>
+                    <tr>
+                        <th>Contrasenya</th>
+                        <td>********</td>
+                    </tr>
+                    <tr>
+                        <th>Rol</th>
+                        <td>
+                            @if (intval($self['administrador']) == 1)
+                                Administrador
+                            @else
+                                Usuari
+                            @endif
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <div class="d-grid gap-2">
+                <a  href="/self/update/{{$self['id']}}" class="btn btn-success" role="button">Personalitzar</a>
+            </div>
         </section>
     </main>
 </body>
