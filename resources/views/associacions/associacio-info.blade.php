@@ -58,6 +58,70 @@
                 @method('DELETE')
                 <input type="hidden" name="cif" value="{{$associacio['CIF']}}">
             </form>
+            <hr>
+            <h1>Treballadors</h1>
+            <table class="table">
+                @php
+                    $number = 1;
+                @endphp
+                <thead>
+                    <th>#</th>
+                    <th>NIF</th>
+                    <th>Nom</th>
+                    <th>Cognom</th>
+                    <th>Tipus</th>
+                    <th>Accions</th>
+                </thead>
+                <tbody>
+                    @foreach ($treballadors as $treballador)
+                        <tr>
+                            <td>{{$number}}</td>
+                            <td>{{$treballador['nif']}}</td>
+                            <td>{{$treballador['nom']}}</td>
+                            <td>{{$treballador['cognom']}}</td>
+                            <td>{{$treballador['tipus']}}</td>
+                            <td>
+                                @if ($treballador['tipus'] == 'Professional')
+                                    <a class="btn btn-secondary" href="/professional/info/{{$treballador['nif']}}" role="button">Més informació</a>
+                                @else
+                                    <a class="btn btn-secondary" href="/voluntari/info/{{$treballador['nif']}}" role="button">Més informació</a>
+                                @endif
+                            </td>
+                            @php
+                                $number++;
+                            @endphp
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <hr>
+            <h1>Socis</h1>
+            <hr>
+            <table class="table">
+                @php
+                    $number = 1;
+                @endphp
+                <thead>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Data de vinculació</th>
+                    <th>Quota</th>
+                    <th>Accions</th>
+                </thead>
+                <tbody>
+                    @foreach ($vincles as $vincle)
+                        <tr>
+                            <td>{{$number}}</td>
+                            <td>{{$vincle['nom']}}</td>
+                            <td>{{$vincle['data_associacio']}}</td>
+                            <td>{{$vincle['quota']}}</td>
+                            <td>
+                                <a class="btn btn-secondary" href="/soci/info/{{$vincle['nif']}}" role="button">Més informació</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </section>
     </main>
 </body>

@@ -2,7 +2,7 @@
 <html lang="ca">
 <head>
     @include('structure.head_content')
-    <title>Modificar associació</title>
+    <title>Modificar soci</title>
 </head>
 <body>
     <main>
@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/socis">socis</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Modificar associació</li>
+                    <li class="breadcrumb-item active" aria-current="page">Modificar soci</li>
                 </ol>
             </nav>
             <h1>Modificar soci: {{$data['nom']}}</h1>

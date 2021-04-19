@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Vincle extends Model
 {
     use HasFactory;
+
+    protected $table = 'formen';
+
+    protected $fillable = ['cif', 'nif', 'data_associacio', 'quota'];
+
+    public $timestamps = false;
 }

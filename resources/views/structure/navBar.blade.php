@@ -7,8 +7,20 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link" href="/inici">Inici</a>
-                <a class="nav-link" href="/associacions">Associacions</a>
-                <a class="nav-link" href="/socis">Socis</a>
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Relació
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li><a class="dropdown-item" href="/associacions">Associacions</a></li>
+                                <li><a class="dropdown-item" href="/socis">Socis</a></li>
+                                <li><a class="dropdown-item" href="/vincles">Vincles</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">

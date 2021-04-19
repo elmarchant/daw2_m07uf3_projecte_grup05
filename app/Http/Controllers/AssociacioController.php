@@ -99,7 +99,15 @@ class AssociacioController extends Controller
 
         if($session === true){
             $associacio = $this->select('associacio', '*', 'WHERE cif="'.$cif.'"');
-            return view('associacions.associacio-info', ['associacio' => $associacio[0]]);
+            $professionals = $this->select('professional', 'professional.nif, nom, cognom, concat("", "Professional") as tipus', 'INNER JOIN treballador WHERE treballador.cif="'.$cif.'" AND professional.nif=treballador.nif');
+            $voluntaris = $this->select('voluntari', 'voluntari.nif, nom, cognom, concat("", "Voluntari") as tipus', 'INNER JOIN treballador WHERE treballador.cif="'.$cif.'" AND voluntari.nif=treballador.nif');
+            $treballadors = array_merge($professionals, $voluntaris);
+            $vincles = $this->select('formen', 'soci.nif, concat(soci.nom, " ", soci.cognom) as nom, data_associacio, quota', 'INNER JOIN soci WHERE soci.nif = formen.nif AND formen.cif="'.$cif.'"');
+            return view('associacions.associacio-info', [
+                'associacio' => $associacio[0],
+                'treballadors' => $treballadors,
+                'vincles' => $vincles
+            ]);
         }else if($session === false){
             return redirect('/');
         }else{

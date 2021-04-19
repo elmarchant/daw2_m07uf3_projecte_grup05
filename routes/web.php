@@ -97,3 +97,11 @@ Route::delete('/voluntari/remove', 'VoluntariController@destroy');
 Route::get('/voluntari/update/{nif}', 'VoluntariController@modify');
 
 Route::put('/voluntari/update/{nif}/{tabla}/{attribute}', 'VoluntariController@update');
+
+Route::get('/vincles', 'VincleController@index');
+
+Route::get('/vincle/create', 'VincleController@create');
+
+Route::post('/vincle/create/save', 'VincleController@store');
+
+Route::delete('/vincle/remove', 'VincleController@destroy');
